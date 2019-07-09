@@ -1,6 +1,6 @@
 # Installation de MAAS sur Proxmox
 
-Note: Tutoriel de l'installation et configuration de MAAS sur Proxmox.
+Note: Tutoriel sur l'installation de MAAS sur Proxmox.
 
 
 
