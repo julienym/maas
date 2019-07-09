@@ -1,4 +1,4 @@
-# Installation et configuration de MAAS
+# Installation de MAAS sur Proxmox
 
 Note: Tutoriel de l'installation et configuration de MAAS sur Proxmox.
 
@@ -7,7 +7,9 @@ Note: Tutoriel de l'installation et configuration de MAAS sur Proxmox.
 ## Installation de MAAS
 
 Connectez vous à XXXXXXXXXXXXXXXXXXX
+
 Username: XXXXXXXXXXXXXXXXXXX
+
 Password: XXXXXXXXXXXXXXXXXXX  
 
 - Créer une VM dans votre "resource pool" ou en appelant votre VM (ex. denis-maas)
@@ -32,8 +34,10 @@ Password: XXXXXXXXXXXXXXXXXXX
 
 ## Configuration de pfSense
 
-Connectez vous à XXXXXXXXXXXXXXXXXXX  
+Connectez vous à XXXXXXXXXXXXXXXXXXX 
+
 Username: XXXXXXXXXXXXXXXXXXX 
+
 Password: XXXXXXXXXXXXXXXXXXX  
 
 
@@ -56,7 +60,7 @@ Password: XXXXXXXXXXXXXXXXXXX
 - N'oubliez pas d'activer vos changements
   ![image](uploads/638ee2b543260c4d6aef69343bc38156/image.png)
 
-- Dans Firewall/NAT, rajouter des règles de port-forwarding.
+- Dans Firewall/NAT, rajouter une règles de port-forwarding NAT.
   Nous ne rajouterons qu'une règle SSH, car nous pourrons tout faire par des tunnels SSH ensuite.
   ![image](uploads/01dd2fd8247ce4e4e3ab2e97c27959f2/image.png)
 
@@ -74,17 +78,11 @@ Password: XXXXXXXXXXXXXXXXXXX
 - Si tout marche bien, configurons ensuite notre ssh pour être plus rapide:
 
 ```
-/etc/hosts
-142.44.148.251 mymaas
-```
-
-```
 ~/.ssh/config
-CanonicalizeHostname yes
-
 Host mymaas
         Port 4822
         User julien
+        HostName ocean.gologic.ca
 ```
 - Maintenant pour accèder à l'interface web de notre Maas qui écoute sur le port 5240 par un tunnel SSH local:
 
