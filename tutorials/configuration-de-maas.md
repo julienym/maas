@@ -60,11 +60,11 @@ Nous devons faire quelques configurations de base:
 
      - 2x K8s worker (4 core, 4Gb ram)
 
-       - Rajouter un disque de 50Gb sur les 3 VMs K8s - ceci permettra de déployer Ceph HA
+       - Rajouter un disque de 50Gb sur les 3 VMs K8s - ceci permettra de déployer Ceph HA comme dynamique storage pour K8s
 
          ![maas-template03](uploads/maas-template03.png)
 
-     - 1x Juju controller (1 core, 2Gb ram)
+     - 1x Juju controller (1 core, 4Gb ram)
 
    - Démarrez une des nouvelles VMs et voyez la booter grace à MAAS !
 
