@@ -1,30 +1,53 @@
-# Juju et déployer kubernetes
+# Workshop - MAAS/Juju et déployer kubernetes
 
 
 
-- Nous allons faire la plupart des prochaines commandes à partir de notre VM Maas, qui est accessible de l'externe. Connectez-vous en SSH. C'est une préférence personnelle, mais j'aime bien avoir un sudo sans mot de passe:
-
-  ```
-  julien@gustaviomaas:~$ sudo -i
-  [sudo] password for julien: 
-  root@gustaviomaas:~# 
-  ```
-
-  Modifier le fichier /etc/sudoers et changer la ligne en rajoutant NOPASSWD:
+- Connectez vous avec le compte demo au MAAS qui vous ai attribué (nous vous fournirons mot de passe et hostname)
 
   ```
-  %sudo   ALL=(ALL:ALL) NOPASSWD:ALL
+  julien@laptop:~$ ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password demo@XXXXXXX.gologic.ca -p 4822
+  ```
+  
+- Créer votre propre compte sur maas et établissez votre mot de passe, si vous avez un clef SSH rajoutée la
+
+  ```
+  demo@gustaviomaas:~$ sudo useradd -m -s /bin/bash patrick
+  demo@gustaviomaas:~$ sudo passwd patrick
+  Enter new UNIX password: 
+  Retype new UNIX password: 
+  passwd: password updated successfully
   ```
 
-- Installons ensuite le client juju
+- Configurons notre ssh pour facilement se connecter avec "ssh mymaas"
 
   ```
-  julien@gustaviomaas:~$ sudo snap install juju --classic
-  juju 2.6.5 from Canonical✓ installed
-  julien@gustaviomaas:~$ 
+  ~/.ssh/config
+  Host mymaas
+          Port 4822
+          User XXXXX
+          HostName XXXX.gologic.ca
+  # Seulement si vous n'utilisez pas de clef SSH
+          PubkeyAuthentication no
+          PreferredAuthentications password
   ```
 
-- Rajoutons notre nouveau Cloud MAAS
+- Maintenant pour accèder à l'interface web du Maas qui écoute sur le port 5240 par un tunnel SSH local:
+
+  ```
+  ssh -N mymaas -L 5240:127.0.0.1:5240
+  ```
+
+  ![image](uploads/7da7f5e34c234d536ac246aff8e4e044/image.png)
+
+- Nous vous fournirons vos compte/mot de passe. Une fois connectez vous verrez toutes les VMs/machines de libre ou qui vous sont attribuées.
+
+  ![maas-work01](/home/julien/git/julienym-github/maas/tutorials/uploads/maas-work01.png)
+  
+- Vous devez avoir au moins une clef SSH dans votre compte pour la suite
+
+  ![maas-work02](/home/julien/git/julienym-github/maas/tutorials/uploads/maas-work02.png)
+  
+- Connectez vous a Maas par ssh, et rajoutons notre nouveau Cloud MAAS
 
   ```
   julien@gustaviomaas:~$ juju add-cloud
@@ -50,7 +73,7 @@
 
 - Il manque notre clef API que vous retrouverez dans MAAS en cliquant sur votre utilisateur admin:
 
-  ![juju01](/home/julien/git/julienym-github/maas/tutorials/uploads/juju01.png)
+  ![juju01](uploads/juju01.png)
 
   ```
   julien@gustaviomaas:~$ juju add-credential gustavio-maas
@@ -65,7 +88,7 @@
   julien@gustaviomaas:~$
   ```
 
-- Un controller Juju peut maintenant être déployer sur une de nos machines dans MAAS. Nous pouvons dire sur quelle machine nous voulons déployer le controller juju.
+- Un controller Juju peut maintenant être déployer sur une de nos machines dans MAAS. Nous pouvons aussi mentionner sur quelle machine nous voulons déployer le controller juju. Sélectionner une des VMs juju de libre.
 
   ```
   julien@gustaviomaas:~$ juju bootstrap gustavio-maas --to gjuju.maas
@@ -74,11 +97,11 @@
   Launching controller instance(s) on gustavio-maas...
   ```
 
-  ![juju02](/home/julien/git/julienym-github/maas/tutorials/uploads/juju02.png)
+  ![juju02](uploads/juju02.png)
 
   N'oublions pas d'allumer ensuite la VM
 
-  ![juju03](/home/julien/git/julienym-github/maas/tutorials/uploads/juju03.png)
+  ![juju03](uploads/juju03.png)
 
 - MAAS installeras Ubuntu et Juju ira configurer le controller
 
@@ -122,29 +145,29 @@
   julien@laptop:~$ ssh -N mymaas -L 17070:192.168.48.2:17070
   ```
 
-  ![juju04](/home/julien/git/julienym-github/maas/tutorials/uploads/juju04.png)
+  ![juju04](uploads/juju04.png)
 
 - Après s'être connecter, créeons un nouveau modèle pour notre déploiement
 
-![juju05](/home/julien/git/julienym-github/maas/tutorials/uploads/juju05.png)
+![juju05](uploads/juju05.png)
 
 - Entrez un nom représentant ce que vous voulez faire
 
-![juju06](/home/julien/git/julienym-github/maas/tutorials/uploads/juju06.png)
+![juju06](uploads/juju06.png)
 
 - Cliquez sur le gros + et choisissez Kubernetes-View et choisissez Kubernetes Core.
 
   Le fichier bundle.yaml permet de voir les contraintes (cpu/ram) que les machines ont besoins - petit truc.
 
-  ![juju07](/home/julien/git/julienym-github/maas/tutorials/uploads/juju07.png)
+  ![juju07](uploads/juju07.png)
 
 - Après l'ajout vous aurez l'option de rajouter vos clefs publiques pour les connections SSH. IMPORTANT, car vous ne pourrez pas vous connecter au master et retrouver la config k8s.
 
-  ![juju09](/home/julien/git/julienym-github/maas/tutorials/uploads/juju09.png)
+  ![juju09](uploads/juju09.png)
 
 - Lorsque ajouter, Juju télécharge le bundle/charm et est prêt à être déployer avec Deploy Changes. N'oublions de partir les VMs que MAAS/Juju ont choisit
 
-  ![juju08](/home/julien/git/julienym-github/maas/tutorials/uploads/juju08.png)
+  ![juju08](uploads/juju08.png)
 
 - Après  retournons sur MAAS en ssh et gardons un oeil sur le status du déploiement.
 
