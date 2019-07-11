@@ -41,11 +41,11 @@
 
 - Nous vous fournirons vos compte/mot de passe. Une fois connectez vous verrez toutes les VMs/machines de libre ou qui vous sont attribuées.
 
-  ![maas-work01](/home/julien/git/julienym-github/maas/tutorials/uploads/maas-work01.png)
+  ![maas-work01](uploads/maas-work01.png)
   
 - Vous devez avoir au moins une clef SSH dans votre compte pour la suite
 
-  ![maas-work02](/home/julien/git/julienym-github/maas/tutorials/uploads/maas-work02.png)
+  ![maas-work02](uploads/maas-work02.png)
   
 - Connectez vous a Maas par ssh, et rajoutons notre nouveau Cloud MAAS
 
