@@ -50,7 +50,7 @@
 
 - Il manque notre clef API que vous retrouverez dans MAAS en cliquant sur votre utilisateur admin:
 
-  ![juju01](/home/julien/git/julienym-github/maas/tutorials/uploads/juju01.png)
+  ![juju01](uploads/juju01.png)
 
   ```
   julien@gustaviomaas:~$ juju add-credential gustavio-maas
@@ -74,11 +74,11 @@
   Launching controller instance(s) on gustavio-maas...
   ```
 
-  ![juju02](/home/julien/git/julienym-github/maas/tutorials/uploads/juju02.png)
+  ![juju02](uploads/juju02.png)
 
   N'oublions pas d'allumer ensuite la VM
 
-  ![juju03](/home/julien/git/julienym-github/maas/tutorials/uploads/juju03.png)
+  ![juju03](uploads/juju03.png)
 
 - MAAS installeras Ubuntu et Juju ira configurer le controller
 
@@ -122,29 +122,29 @@
   julien@laptop:~$ ssh -N mymaas -L 17070:192.168.48.2:17070
   ```
 
-  ![juju04](/home/julien/git/julienym-github/maas/tutorials/uploads/juju04.png)
+  ![juju04](uploads/juju04.png)
 
 - Après s'être connecter, créeons un nouveau modèle pour notre déploiement
 
-![juju05](/home/julien/git/julienym-github/maas/tutorials/uploads/juju05.png)
+![juju05](uploads/juju05.png)
 
 - Entrez un nom représentant ce que vous voulez faire
 
-![juju06](/home/julien/git/julienym-github/maas/tutorials/uploads/juju06.png)
+![juju06](uploads/juju06.png)
 
 - Cliquez sur le gros + et choisissez Kubernetes-View et choisissez Kubernetes Core.
 
   Le fichier bundle.yaml permet de voir les contraintes (cpu/ram) que les machines ont besoins - petit truc.
 
-  ![juju07](/home/julien/git/julienym-github/maas/tutorials/uploads/juju07.png)
+  ![juju07](uploads/juju07.png)
 
 - Après l'ajout vous aurez l'option de rajouter vos clefs publiques pour les connections SSH. IMPORTANT, car vous ne pourrez pas vous connecter au master et retrouver la config k8s.
 
-  ![juju09](/home/julien/git/julienym-github/maas/tutorials/uploads/juju09.png)
+  ![juju09](uploads/juju09.png)
 
 - Lorsque ajouter, Juju télécharge le bundle/charm et est prêt à être déployer avec Deploy Changes. N'oublions de partir les VMs que MAAS/Juju ont choisit
 
-  ![juju08](/home/julien/git/julienym-github/maas/tutorials/uploads/juju08.png)
+  ![juju08](uploads/juju08.png)
 
 - Après  retournons sur MAAS en ssh et gardons un oeil sur le status du déploiement.
 
