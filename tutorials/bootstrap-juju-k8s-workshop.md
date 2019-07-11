@@ -1,5 +1,11 @@
 # Workshop - MAAS/Juju et déployer kubernetes
 
+Ce tutoriel utilise principalement des commandes ssh sur Linux, mais sur Windows avec Putty voici comment faire:
+
+Clef SSH avec Putty: https://www.ssh.com/ssh/putty/windows/puttygen
+
+Tunnel SSH : https://blog.devolutions.net/2017/4/how-to-configure-an-ssh-tunnel-on-putty
+
 
 
 - Connectez vous avec le compte demo au MAAS qui vous ai attribué (nous vous fournirons mot de passe et hostname)
@@ -71,7 +77,7 @@
   julien@gustaviomaas:~$ 
   ```
 
-- Il manque notre clef API que vous retrouverez dans MAAS en cliquant sur votre utilisateur admin:
+- Il manque notre clef API que vous retrouverez dans MAAS en cliquant sur votre utilisateur:
 
   ![juju01](uploads/juju01.png)
 
